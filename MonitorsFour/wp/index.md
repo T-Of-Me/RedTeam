@@ -52,7 +52,7 @@ sudo /home/tiwza/Desktop/MyWWW/RedTeam/MonitorsFour/CVE-2025-24367-Cacti-PoC/ven
 Lấy được flag user `d1df83dcb64e5a53ebb3f1566335522a`
 
 # Leo thang bằng CVE-2025-9074
-[CVE-2025-9074: Giúp chúng ta từ 1 máy kali chạy trong docker có thể leo ngang quyền với nguời dùng docker , nghĩa là có thể thêm sửa xóa image , container ... ](https://nvd.nist.gov/vuln/detail/CVE-2025-9074)
+[CVE-2025-9074: Giúp chúng ta từ 1 máy kali chạy trong docker có thể leo ngang quyền với nguời dùng docker , nghĩa là có thể thêm sửa xóa image , container ... , thậm chí RCE được máy chủ](https://nvd.nist.gov/vuln/detail/CVE-2025-9074)
 - Thep như mặc định của lỗi sẽ nằm ở `192.168.65.7:2375` tuy nhiên ở trường hợp này thì không
 - Giờ ta cần tìm API để có thể mount với mạng bên ngoài 
 ![alt text](image-12.png)
