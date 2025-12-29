@@ -17,3 +17,5 @@ nmap -p- -sC -sV  10.10.11.97
 ![alt text](image-4.png)
 
 - Theo đề bài cung cấp ta sẽ đăng nhập với `d.cooper@fries.htb / D4LE11maan!!`
+
+- 
