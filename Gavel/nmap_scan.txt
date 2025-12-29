@@ -1,0 +1,1 @@
+# Nmap 7.94SVN scan initiated Thu Dec 25 15:09:16 2025 as: nmap -p- -sC -sV -oN nmap_scan.txt 10.10.11.97

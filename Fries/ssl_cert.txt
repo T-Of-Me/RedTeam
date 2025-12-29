@@ -1,0 +1,17 @@
+# Nmap 7.94SVN scan initiated Fri Dec 26 15:11:25 2025 as: nmap -p443 --script ssl-cert -oN ssl_cert.txt 10.10.11.96
+Nmap scan report for 10.10.11.96
+Host is up (0.35s latency).
+
+PORT    STATE SERVICE
+443/tcp open  https
+| ssl-cert: Subject: commonName=pwm.fries.htb/organizationName=Fries Foods LTD/stateOrProvinceName=Madrid/countryName=SP
+| Issuer: commonName=pwm.fries.htb/organizationName=Fries Foods LTD/stateOrProvinceName=Madrid/countryName=SP
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2025-06-01T22:06:09
+| Not valid after:  2026-06-01T22:06:09
+| MD5:   118d:ea17:3fba:3b65:28de:8e26:33e7:19f2
+|_SHA-1: 5503:8aa8:0080:a853:ca73:87e3:b705:3fe8:b599:a855
+
+# Nmap done at Fri Dec 26 15:11:27 2025 -- 1 IP address (1 host up) scanned in 2.25 seconds

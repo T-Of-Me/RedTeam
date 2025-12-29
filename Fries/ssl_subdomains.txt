@@ -1,0 +1,71 @@
+# Nmap 7.94SVN scan initiated Fri Dec 26 15:20:09 2025 as: nmap -p 22,53,80,88,135,139,389,443,445,464,593,636,2179,3268,3269,5985,9389,49667,49687,49688,49690,49699,49923,49956,49983 --script ssl-cert -oN ssl_subdomains.txt 10.10.11.96
+Nmap scan report for 10.10.11.96
+Host is up (0.50s latency).
+
+PORT      STATE SERVICE
+22/tcp    open  ssh
+53/tcp    open  domain
+80/tcp    open  http
+88/tcp    open  kerberos-sec
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+389/tcp   open  ldap
+| ssl-cert: Subject: 
+| Subject Alternative Name: DNS:DC01.fries.htb, DNS:fries.htb, DNS:FRIES
+| Issuer: commonName=fries-DC01-CA
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2025-11-18T05:39:19
+| Not valid after:  2105-11-18T05:39:19
+| MD5:   2410:a18d:14b3:7f5d:8e34:d144:0bac:6469
+|_SHA-1: 3e84:1436:bb47:6ccd:f5ee:f805:cacd:47b6:6485:7e09
+443/tcp   open  https
+| ssl-cert: Subject: commonName=pwm.fries.htb/organizationName=Fries Foods LTD/stateOrProvinceName=Madrid/countryName=SP
+| Issuer: commonName=pwm.fries.htb/organizationName=Fries Foods LTD/stateOrProvinceName=Madrid/countryName=SP
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2025-06-01T22:06:09
+| Not valid after:  2026-06-01T22:06:09
+| MD5:   118d:ea17:3fba:3b65:28de:8e26:33e7:19f2
+|_SHA-1: 5503:8aa8:0080:a853:ca73:87e3:b705:3fe8:b599:a855
+445/tcp   open  microsoft-ds
+464/tcp   open  kpasswd5
+593/tcp   open  http-rpc-epmap
+636/tcp   open  ldapssl
+| ssl-cert: Subject: 
+| Subject Alternative Name: DNS:DC01.fries.htb, DNS:fries.htb, DNS:FRIES
+| Issuer: commonName=fries-DC01-CA
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2025-11-18T05:39:19
+| Not valid after:  2105-11-18T05:39:19
+| MD5:   2410:a18d:14b3:7f5d:8e34:d144:0bac:6469
+|_SHA-1: 3e84:1436:bb47:6ccd:f5ee:f805:cacd:47b6:6485:7e09
+2179/tcp  open  vmrdp
+3268/tcp  open  globalcatLDAP
+3269/tcp  open  globalcatLDAPssl
+| ssl-cert: Subject: 
+| Subject Alternative Name: DNS:DC01.fries.htb, DNS:fries.htb, DNS:FRIES
+| Issuer: commonName=fries-DC01-CA
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2025-11-18T05:39:19
+| Not valid after:  2105-11-18T05:39:19
+| MD5:   2410:a18d:14b3:7f5d:8e34:d144:0bac:6469
+|_SHA-1: 3e84:1436:bb47:6ccd:f5ee:f805:cacd:47b6:6485:7e09
+5985/tcp  open  wsman
+9389/tcp  open  adws
+49667/tcp open  unknown
+49687/tcp open  unknown
+49688/tcp open  unknown
+49690/tcp open  unknown
+49699/tcp open  unknown
+49923/tcp open  unknown
+49956/tcp open  unknown
+49983/tcp open  unknown
+
+# Nmap done at Fri Dec 26 15:23:13 2025 -- 1 IP address (1 host up) scanned in 184.06 seconds

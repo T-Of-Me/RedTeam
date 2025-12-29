@@ -1,0 +1,11 @@
+# Nmap 7.94SVN scan initiated Fri Dec 26 07:55:39 2025 as: nmap -sC -sV -p- -oN rs.txt 10.10.11.98
+Nmap scan report for monitorsfour.htb (10.10.11.98)
+Host is up (0.38s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT     STATE SERVICE VERSION
+80/tcp   open  http    nginx
+5985/tcp open  http    Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Fri Dec 26 08:09:48 2025 -- 1 IP address (1 host up) scanned in 848.66 seconds
