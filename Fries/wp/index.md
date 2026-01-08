@@ -60,10 +60,10 @@ exploit
 - Tìm hiểu về sơ đồ mạng ta thấy : `172.18.0.4`
 ![alt text](image-13.png)
 
-- Quét các máy trong này 
+- Quét các máy trong container
 ![alt text](image-14.png)
-- Tìm thấy thông tin xác thực 
-![alt text](image-19.png)
+
+- Tìm thấy thông tin xác thực  : `PGADMIN_DEFAULT_PASSWORD=Friesf00Ds2025!!` và `PGADMIN_DEFAULT_EMAIL=admin@fries.htb`
 ```code
  ─────────────────────────────────────────────
 │         Docker Host (172.18.0.1)            │
@@ -149,9 +149,8 @@ ls -la /mnt/nfs_fries/
 
 - Tạo user đủ quyền để đọc được cert 
 ![alt text](image-30.png)
-```code
 ![alt text](image-31.png)
-```
+
 
 - Tạo user trên máy atk 
 ![alt text](image-32.png)
