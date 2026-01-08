@@ -1,0 +1,11 @@
+start
+session
+ifconfig
+start
+session 1
+1
+start
+session
+1
+ls
+start
