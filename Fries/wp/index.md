@@ -313,7 +313,8 @@ HmwL9/U//oQhCT0X9pXTww==
 bash2-5.1$ 
 ```
 
-- Đọc pwd
+- Đọc pwd                     
+
 ![alt text](image-39.png)
 ```code
 bash2-5.1$ cat passwd
