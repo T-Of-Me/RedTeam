@@ -15,3 +15,8 @@ session
 1
 session
 start
+session
+start
+sudo su - barman_local -c "cp /mnt/nfs_fries/shared/target_bash /mnt/nfs_fries/shared/bash2"
+sudo su - barman_local -c "chmod 6777 /mnt/nfs_fries/shared/bash2"
+start

