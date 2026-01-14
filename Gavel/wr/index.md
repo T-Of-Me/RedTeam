@@ -74,6 +74,7 @@ nc -lvnp 4444
 ![alt text](image-11.png)
 - Tìm các Binary có sắn trên máy mà ta có thể control được
 ![alt text](image-13.png)
+
 `-rwxr-xr-x  1 root gavel-seller 17688 Oct  3 19:35 gavel-util`
     - Owner: `root`
     - Group: `gavel-seller`
