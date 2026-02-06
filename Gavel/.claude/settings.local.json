@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del admin.php bidding.php login.php logout.php register.php)",
+      "Bash(php -r:*)"
+    ]
+  }
+}
